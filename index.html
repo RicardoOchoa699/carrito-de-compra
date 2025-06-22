@@ -1,63 +1,222 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Carrito de Compras</title>
-    <link rel="stylesheet" href="estilos.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiTienda Pro - Carrito de Compras</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Tu Carrito de Compras</h1>
-        <div class="carrito">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Imagen</th>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="https://image.made-in-china.com/202f0j00TatRHPfsuCoM/Gaming-Mouse-Mause-4000dpi-Adjustable-Computer-Optical-LED-Game-Mice-Wired-USB-Games-Cable-Mouse-Lol-for-Professional-Gamer.jpg" alt="Mouse" class="producto-img" /></td>
-                        <td>Mouse Inalámbrico</td>
-                        <td>2</td>
-                        <td>$30.000</td>
-                        <td>$60.000</td>
-                    </tr>
-                    <tr>
-                        <td><img src="https://http2.mlstatic.com/D_NQ_NP_744294-MLU77949267769_072024-O.webp" alt="Teclado" class="producto-img" /></td>
-                        <td>Teclado Mecánico</td>
-                        <td>1</td>
-                        <td>$120.000</td>
-                        <td>$120.000</td>
-                    </tr>
-                    <tr>
-                        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTbkIY1EYCst0-onRMzYRXD8GJ3mfUjJXxA&s" alt="Auriculares" class="producto-img" /></td>
-                        <td>Auriculares Gamer</td>
-                        <td>1</td>
-                        <td>$80.000</td>
-                        <td>$80.000</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4" class="total-label">Total</td>
-                        <td class="total-amount">$260.000</td>
-                    </tr>
-                </tfoot>
-            </table>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🛒</div>
+                    <h1>MiTienda Pro</h1>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Buscar productos..." class="search-input">
+                </div>
+                
+                <button class="cart-btn" id="cartBtn">
+                    🛒 Carrito
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
         </div>
+    </header>
 
-        <div class="repo">
-            URL del Repositorio:
-            <a href="https://github.com/tu-usuario/carro-compras" target="_blank">
-                https://github.com/tu-usuario/carro-compras
-            </a>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="hero-section">
+                <h2>Productos Destacados</h2>
+                <p>Descubre los mejores productos con ofertas increíbles</p>
+            </div>
+            
+            <!-- Productos hardcodeados para que funcionen -->
+            <div class="products-grid" id="productsGrid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=1" alt="iPhone 15 Pro Max">
+                        <div class="discount-badge">-7%</div>
+                        <button class="favorite-btn" onclick="toggleFavorite(1)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                        <h3 class="product-name">iPhone 15 Pro Max</h3>
+                        <p class="product-category">Electrónicos</p>
+                        <div class="product-price">
+                            <span class="original-price">$1,399</span>
+                            <span class="current-price">$1,299</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(1)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=2" alt="MacBook Air M3">
+                        <div class="discount-badge">-8%</div>
+                        <button class="favorite-btn" onclick="toggleFavorite(2)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                        <h3 class="product-name">MacBook Air M3</h3>
+                        <p class="product-category">Computadoras</p>
+                        <div class="product-price">
+                            <span class="original-price">$1,299</span>
+                            <span class="current-price">$1,199</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(2)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=3" alt="AirPods Pro">
+                        <button class="favorite-btn" onclick="toggleFavorite(3)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <h3 class="product-name">AirPods Pro</h3>
+                        <p class="product-category">Audio</p>
+                        <div class="product-price">
+                            <span class="current-price">$249</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(3)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=4" alt="Samsung Galaxy S24">
+                        <div class="discount-badge">-10%</div>
+                        <button class="favorite-btn" onclick="toggleFavorite(4)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.6)</div>
+                        <h3 class="product-name">Samsung Galaxy S24</h3>
+                        <p class="product-category">Electrónicos</p>
+                        <div class="product-price">
+                            <span class="original-price">$999</span>
+                            <span class="current-price">$899</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(4)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=5" alt="Sony WH-1000XM5">
+                        <button class="favorite-btn" onclick="toggleFavorite(5)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                        <h3 class="product-name">Sony WH-1000XM5</h3>
+                        <p class="product-category">Audio</p>
+                        <div class="product-price">
+                            <span class="current-price">$399</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(5)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=6" alt="iPad Pro 12.9">
+                        <div class="discount-badge">-8%</div>
+                        <button class="favorite-btn" onclick="toggleFavorite(6)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <h3 class="product-name">iPad Pro 12.9</h3>
+                        <p class="product-category">Tablets</p>
+                        <div class="product-price">
+                            <span class="original-price">$1,199</span>
+                            <span class="current-price">$1,099</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(6)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=7" alt="Nintendo Switch OLED">
+                        <button class="favorite-btn" onclick="toggleFavorite(7)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.5)</div>
+                        <h3 class="product-name">Nintendo Switch OLED</h3>
+                        <p class="product-category">Gaming</p>
+                        <div class="product-price">
+                            <span class="current-price">$349</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(7)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/300/300?random=8" alt="Canon EOS R5">
+                        <div class="discount-badge">-7%</div>
+                        <button class="favorite-btn" onclick="toggleFavorite(8)">❤️</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                        <h3 class="product-name">Canon EOS R5</h3>
+                        <p class="product-category">Cámaras</p>
+                        <div class="product-price">
+                            <span class="original-price">$4,199</span>
+                            <span class="current-price">$3,899</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(8)">➕ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 Tu Carrito (<span id="cartItemsCount">0</span> productos)</h3>
+            <button class="close-cart" id="closeCart">✕</button>
+        </div>
+        
+        <div class="cart-content">
+            <div class="cart-empty" id="cartEmpty">
+                <div class="empty-icon">🛒</div>
+                <p>Tu carrito está vacío</p>
+                <small>¡Agrega algunos productos increíbles!</small>
+            </div>
+            
+            <div class="cart-items" id="cartItems"></div>
+            
+            <div class="cart-footer" id="cartFooter" style="display: none;">
+                <div class="cart-total">
+                    <div class="total-row">
+                        <span>Total:</span>
+                        <span class="total-price" id="totalPrice">$0</span>
+                    </div>
+                </div>
+                
+                <div class="cart-actions">
+                    <button class="btn btn-primary" id="checkoutBtn">💳 Finalizar Compra</button>
+                    <button class="btn btn-secondary" id="clearCartBtn">🗑️ Vaciar Carrito</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Producto agregado al carrito</span>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
