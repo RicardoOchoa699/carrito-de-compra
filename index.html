@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito Funcional - Definitivo</title>
+    <title>🛒 MiTienda Pro - Carrito Premium</title>
     <style>
         * {
             margin: 0;
@@ -12,88 +12,267 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
         }
 
         .debug-info {
-            background: #000;
-            color: #0f0;
-            padding: 10px;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #00ff41;
+            padding: 12px 20px;
             margin-bottom: 20px;
-            border-radius: 5px;
-            font-family: monospace;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid #00ff41;
         }
 
         header {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        header h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .cart-button {
-            background: #007bff;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
-            padding: 15px 25px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cart-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cart-button:hover::before {
+            left: 100%;
         }
 
         .cart-button:hover {
-            background: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
         }
 
         .products {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+            padding: 0 10px;
         }
 
         .product {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .product:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .product-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .product:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .favorite-btn:hover {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 14px;
+        }
+
+        .rating-text {
+            color: #666;
+            font-weight: 500;
         }
 
         .product h3 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 24px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            line-height: 1.3;
         }
 
-        .product p {
+        .product-category {
+            color: #7f8c8d;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .original-price {
+            color: #95a5a6;
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+
+        .current-price {
             font-size: 22px;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .add-btn {
-            background: #28a745;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 700;
             width: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .add-btn:hover::before {
+            left: 100%;
         }
 
         .add-btn:hover {
-            background: #1e7e34;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.6);
         }
 
         .cart-modal {
@@ -104,7 +283,9 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             z-index: 1000;
+            animation: fadeIn 0.3s ease;
         }
 
         .cart-modal.show {
@@ -114,47 +295,85 @@
         }
 
         .cart-content {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             width: 90%;
-            max-width: 600px;
-            max-height: 80%;
-            border-radius: 10px;
+            max-width: 700px;
+            max-height: 85%;
+            border-radius: 25px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .cart-header {
-            background: #007bff;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 20px;
+            padding: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        .cart-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
         .close-btn {
-            background: none;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            font-size: 30px;
+            font-size: 24px;
             cursor: pointer;
-            padding: 5px;
+            padding: 10px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
         }
 
         .cart-items {
             flex: 1;
-            padding: 20px;
+            padding: 25px;
             overflow-y: auto;
-            min-height: 200px;
+            min-height: 250px;
         }
 
         .cart-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 15px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .cart-item:hover {
+            background: rgba(248, 249, 250, 1);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: contain;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .item-info {
@@ -162,118 +381,469 @@
         }
 
         .item-name {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 18px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 4px;
         }
 
         .item-price {
-            color: #28a745;
-            font-weight: bold;
-            font-size: 16px;
+            color: #27ae60;
+            font-weight: 700;
+            font-size: 14px;
         }
 
         .quantity-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin: 10px 0;
+            gap: 12px;
+            margin: 8px 0;
         }
 
         .qty-btn {
-            background: #6c757d;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
             color: white;
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(116, 185, 255, 0.4);
+        }
+
+        .qty-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(116, 185, 255, 0.6);
         }
 
         .quantity {
-            font-weight: bold;
-            font-size: 18px;
-            min-width: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            min-width: 25px;
             text-align: center;
+            color: #2c3e50;
+        }
+
+        .item-total {
+            text-align: right;
+        }
+
+        .item-total-price {
+            font-weight: 700;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 8px;
         }
 
         .remove-btn {
-            background: #dc3545;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 3px;
+            padding: 6px 12px;
+            border-radius: 15px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .remove-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
         }
 
         .cart-footer {
-            background: #f8f9fa;
-            padding: 20px;
-            border-top: 1px solid #eee;
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-top: 1px solid rgba(0,0,0,0.1);
         }
 
         .cart-footer p {
             margin-bottom: 20px;
             font-size: 24px;
             text-align: center;
-            font-weight: bold;
+            font-weight: 800;
+            color: #2c3e50;
         }
 
         .checkout-btn, .clear-btn {
             width: 100%;
             padding: 15px;
             border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             margin-bottom: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
         .checkout-btn {
-            background: #28a745;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
             color: white;
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(39, 174, 96, 0.6);
         }
 
         .clear-btn {
-            background: #dc3545;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
             color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .clear-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                padding: 0 5px;
+            }
+            
+            .cart-content {
+                width: 95%;
+                height: 90%;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Scrollbar personalizado */
+        .cart-items::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .cart-items::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <div class="debug-info">
-        <p>🔍 DEBUG: <span id="debugInfo">Iniciando...</span></p>
+        <p>🔍 DEBUG: <span id="debugInfo">Iniciando sistema premium...</span></p>
     </div>
 
     <header>
-        <h1>🛒 MiTienda Funcional</h1>
+        <h1>🛒 MiTienda Pro</h1>
         <button id="cartBtn" class="cart-button">
-            Carrito (<span id="cartCount">0</span>)
+            🛍️ Carrito (<span id="cartCount">0</span>)
         </button>
     </header>
 
     <main>
         <div class="products">
+            <!-- iPhone 15 Pro Max -->
             <div class="product">
-                <h3>iPhone 15</h3>
-                <p>$1299</p>
-                <button class="add-btn" onclick="agregarAlCarrito(1)">Agregar</button>
+                <div class="product-image">
+                    <img src="https://co.tiendasishop.com/cdn/shop/files/IMG-10942155_c29b7de7-34a7-4248-b184-45b256ae3432.jpg?v=1723513460" alt="iPhone 15 Pro Max">
+                    <div class="product-badge">Nuevo</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.8) 2,847 reseñas</span>
+                    </div>
+                    <h3>iPhone 15 Pro Max</h3>
+                    <div class="product-category">Smartphones Premium</div>
+                    <div class="product-price">
+                        <span class="original-price">$1,399</span>
+                        <span class="current-price">$1,299</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(1)">🛒 Agregar al Carrito</button>
+                </div>
             </div>
             
+            <!-- MacBook Air M3 -->
             <div class="product">
-                <h3>MacBook</h3>
-                <p>$1199</p>
-                <button class="add-btn" onclick="agregarAlCarrito(2)">Agregar</button>
+                <div class="product-image">
+                    <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-midnight-select-20220606?wid=300&hei=300&fmt=jpeg&qlt=95&.v=1653084303665" alt="MacBook Air M3">
+                    <div class="product-badge">Oferta</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.9) 1,523 reseñas</span>
+                    </div>
+                    <h3>MacBook Air M3</h3>
+                    <div class="product-category">Laptops Profesionales</div>
+                    <div class="product-price">
+                        <span class="original-price">$1,299</span>
+                        <span class="current-price">$1,199</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(2)">🛒 Agregar al Carrito</button>
+                </div>
             </div>
             
+            <!-- AirPods Pro -->
             <div class="product">
-                <h3>AirPods</h3>
-                <p>$249</p>
-                <button class="add-btn" onclick="agregarAlCarrito(3)">Agregar</button>
+                <div class="product-image">
+                    <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=300&hei=300&fmt=jpeg&qlt=95&.v=1660803972361" alt="AirPods Pro">
+                    <div class="product-badge">Popular</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.7) 3,291 reseñas</span>
+                    </div>
+                    <h3>AirPods Pro (2ª Gen)</h3>
+                    <div class="product-category">Audio Premium</div>
+                    <div class="product-price">
+                        <span class="current-price">$249</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(3)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Samsung Galaxy S24 -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_731135-MLA79227832577_092024-O.webp" alt="Samsung Galaxy S24 Ultra">
+                    <div class="product-badge">Hot</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.6) 1,892 reseñas</span>
+                    </div>
+                    <h3>Samsung Galaxy S24 Ultra</h3>
+                    <div class="product-category">Smartphones Android</div>
+                    <div class="product-price">
+                        <span class="original-price">$1,199</span>
+                        <span class="current-price">$1,099</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(4)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- iPad Pro -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://mac-center.com/cdn/shop/files/IMG-13190915_06e2ee28-e931-4cda-a2e8-482ab0e054cc.jpg?v=1723751013&width=823" alt="iPad Pro">
+                    <div class="product-badge">Pro</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.8) 967 reseñas</span>
+                    </div>
+                    <h3>iPad Pro 13" M4</h3>
+                    <div class="product-category">Tablets Profesionales</div>
+                    <div class="product-price">
+                        <span class="original-price">$1,299</span>
+                        <span class="current-price">$1,199</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(5)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Sony WH-1000XM5 -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://www.sony.com.co/image/5d02da5df552836db894cead8a68f5f3?fmt=pjpeg&wid=300&hei=300&bgcolor=F1F5F9&bgc=F1F5F9" alt="Sony WH-1000XM5">
+                    <div class="product-badge">Audio</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.7) 2,156 reseñas</span>
+                    </div>
+                    <h3>Sony WH-1000XM5</h3>
+                    <div class="product-category">Audífonos Premium</div>
+                    <div class="product-price">
+                        <span class="current-price">$399</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(6)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Nintendo Switch OLED -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://exitocol.vtexassets.com/arquivos/ids/17775267/consola-nintendo-switch-oled-blanca-64gb-pantalla-7-pulgadas.jpg?v=638167626667430000" alt="Nintendo Switch OLED">
+                    <div class="product-badge">Gaming</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.5) 3,847 reseñas</span>
+                    </div>
+                    <h3>Nintendo Switch OLED</h3>
+                    <div class="product-category">Consolas Gaming</div>
+                    <div class="product-price">
+                        <span class="current-price">$349</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(7)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Apple Watch Series 9 -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/apple-watch-series-9.png" alt="Apple Watch Series 9">
+                    <div class="product-badge">Smart</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.6) 1,234 reseñas</span>
+                    </div>
+                    <h3>Apple Watch Series 9</h3>
+                    <div class="product-category">Smartwatches</div>
+                    <div class="product-price">
+                        <span class="original-price">$429</span>
+                        <span class="current-price">$399</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(8)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Canon EOS R5 -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b?w=300&h=300" alt="Canon EOS R5">
+                    <div class="product-badge">Pro</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.9) 567 reseñas</span>
+                    </div>
+                    <h3>Canon EOS R5</h3>
+                    <div class="product-category">Cámaras Profesionales</div>
+                    <div class="product-price">
+                        <span class="original-price">$4,199</span>
+                        <span class="current-price">$3,899</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(9)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Tesla Model Y -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://acnews.blob.core.windows.net/imgnews/paragraph/NPAZ_210a6d31cd0d498a9ef3d306d65282dc.webp" alt="Tesla Model Y">
+                    <div class="product-badge">Electric</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.8) 892 reseñas</span>
+                    </div>
+                    <h3>Tesla Model Y</h3>
+                    <div class="product-category">Vehículos Eléctricos</div>
+                    <div class="product-price">
+                        <span class="original-price">$52,990</span>
+                        <span class="current-price">$47,740</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(10)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- MacBook Pro 16" -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://mac-center.com/cdn/shop/files/IMG-11197325_533x.jpg?v=1723748835" alt="MacBook Pro 16">
+                    <div class="product-badge">Pro Max</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.9) 743 reseñas</span>
+                    </div>
+                    <h3>MacBook Pro 16" M3 Max</h3>
+                    <div class="product-category">Laptops Pro</div>
+                    <div class="product-price">
+                        <span class="original-price">$3,999</span>
+                        <span class="current-price">$3,699</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(11)">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- PlayStation 5 -->
+            <div class="product">
+                <div class="product-image">
+                    <img src="https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$300px$" alt="PlayStation 5">
+                    <div class="product-badge">Gaming</div>
+                    <button class="favorite-btn">❤️</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">(4.7) 4,521 reseñas</span>
+                    </div>
+                    <h3>PlayStation 5</h3>
+                    <div class="product-category">Consolas Gaming</div>
+                    <div class="product-price">
+                        <span class="current-price">$499</span>
+                    </div>
+                    <button class="add-btn" onclick="agregarAlCarrito(12)">🛒 Agregar al Carrito</button>
+                </div>
             </div>
         </div>
     </main>
@@ -282,34 +852,107 @@
     <div id="cartModal" class="cart-modal">
         <div class="cart-content">
             <div class="cart-header">
-                <h2>🛒 Tu Carrito</h2>
+                <h2>🛍️ Tu Carrito Premium</h2>
                 <button id="closeCart" class="close-btn">✕</button>
             </div>
             
             <div id="cartItems" class="cart-items">
-                <p style="text-align: center; color: #666;">🛒 Carrito vacío</p>
+                <div style="text-align: center; padding: 40px;">
+                    <div style="font-size: 80px; margin-bottom: 20px; opacity: 0.3;">🛒</div>
+                    <p style="font-size: 18px; color: #666; margin-bottom: 10px;">Tu carrito está vacío</p>
+                    <p style="color: #999;">¡Agrega algunos productos increíbles!</p>
+                </div>
             </div>
             
             <div class="cart-footer">
-                <p>Total: $<span id="totalPrice">0</span></p>
-                <button id="checkoutBtn" class="checkout-btn">💳 Comprar Ahora</button>
+                <p>💰 Total: $<span id="totalPrice">0</span></p>
+                <button id="checkoutBtn" class="checkout-btn">💳 Finalizar Compra</button>
                 <button id="clearBtn" class="clear-btn">🗑️ Vaciar Carrito</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 🛒 CARRITO FUNCIONAL - INLINE
-        console.log("🚀 INICIANDO CARRITO");
+        // 🛒 CARRITO FUNCIONAL PREMIUM CON MÁS PRODUCTOS
+        console.log("🚀 INICIANDO CARRITO PREMIUM");
         
         // Variables globales
         let carrito = [];
         
-        // Productos
+        // Productos con imágenes optimizadas
         const productos = {
-            1: { id: 1, nombre: "iPhone 15", precio: 1299 },
-            2: { id: 2, nombre: "MacBook", precio: 1199 },
-            3: { id: 3, nombre: "AirPods", precio: 249 }
+            1: { 
+                id: 1, 
+                nombre: "iPhone 15 Pro Max", 
+                precio: 1299,
+                imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-naturaltitanium-pdp-image-position-1a_GBEN?wid=200&hei=200&fmt=jpeg&qlt=95&.v=1693086369781"
+            },
+            2: { 
+                id: 2, 
+                nombre: "MacBook Air M3", 
+                precio: 1199,
+                imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-midnight-select-20220606?wid=200&hei=200&fmt=jpeg&qlt=95&.v=1653084303665"
+            },
+            3: { 
+                id: 3, 
+                nombre: "AirPods Pro (2ª Gen)", 
+                precio: 249,
+                imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=200&hei=200&fmt=jpeg&qlt=95&.v=1660803972361"
+            },
+            4: { 
+                id: 4, 
+                nombre: "Samsung Galaxy S24 Ultra", 
+                precio: 1099,
+                imagen: "https://images.samsung.com/is/image/samsung/p6pim/co/2401/gallery/co-galaxy-s24-s928-sm-s928bzkeeco-thumb-539573043?wid=200&hei=200"
+            },
+            5: { 
+                id: 5, 
+                nombre: "iPad Pro 13\" M4", 
+                precio: 1199,
+                imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-13-select-wifi-spacegray-202405?wid=200&hei=200&fmt=jpeg&qlt=95&.v=1713308272877"
+            },
+            6: { 
+                id: 6, 
+                nombre: "Sony WH-1000XM5", 
+                precio: 399,
+                imagen: "https://www.sony.com.co/image/5d02da5df552836db894cead8a68f5f3?fmt=pjpeg&wid=200&hei=200&bgcolor=F1F5F9&bgc=F1F5F9"
+            },
+            7: { 
+                id: 7, 
+                nombre: "Nintendo Switch OLED", 
+                precio: 349,
+                imagen: "https://assets.nintendo.com/image/upload/c_fill,w_200,h_200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000000964/811316ca6a8e0b0e5b7b8e5b6b5b5b5b5b5b5b5b"
+            },
+            8: { 
+                id: 8, 
+                nombre: "Apple Watch Series 9", 
+                precio: 399,
+                imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-s9-aluminum-pink-nc-45-sport-band-pink-pdp-image-position-1__GBEN?wid=200&hei=200&fmt=jpeg&qlt=95&.v=1692895933618"
+            },
+            9: { 
+                id: 9, 
+                nombre: "Canon EOS R5", 
+                precio: 3899,
+                imagen: "https://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b?w=200&h=200"
+            },
+            10: { 
+                id: 10, 
+                nombre: "Tesla Model Y", 
+                precio: 47740,
+                imagen: "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Model-Y-Main-Hero-Desktop-LHD.jpg"
+            },
+            11: { 
+                id: 11, 
+                nombre: "MacBook Pro 16\" M3 Max", 
+                precio: 3699,
+                imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-spacegray-select-202310?wid=200&hei=200&fmt=jpeg&qlt=95&.v=1697311054290"
+            },
+            12: { 
+                id: 12, 
+                nombre: "PlayStation 5", 
+                precio: 499,
+                imagen: "https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$200px$"
+            }
         };
         
         // Función para actualizar debug
@@ -324,7 +967,7 @@
         // Inicializar cuando cargue la página
         window.onload = function() {
             console.log("✅ PÁGINA CARGADA");
-            actualizarDebug("Página cargada correctamente");
+            actualizarDebug("Sistema premium con 12 productos inicializado");
             
             // Configurar eventos
             const botonCarrito = document.getElementById('cartBtn');
@@ -334,32 +977,29 @@
             
             if (botonCarrito) {
                 botonCarrito.onclick = abrirCarrito;
-                actualizarDebug("Evento carrito configurado");
+                actualizarDebug("Eventos configurados correctamente");
             }
             
             if (botonCerrar) {
                 botonCerrar.onclick = cerrarCarrito;
-                actualizarDebug("Evento cerrar configurado");
             }
             
             if (botonComprar) {
                 botonComprar.onclick = comprar;
-                actualizarDebug("Evento comprar configurado");
             }
             
             if (botonVaciar) {
                 botonVaciar.onclick = vaciarCarrito;
-                actualizarDebug("Evento vaciar configurado");
             }
             
             actualizarContador();
-            actualizarDebug("Carrito inicializado correctamente");
+            actualizarDebug("Carrito premium listo - 12 productos disponibles");
         };
         
         // Agregar al carrito
         function agregarAlCarrito(idProducto) {
             console.log("➕ AGREGANDO:", idProducto);
-            actualizarDebug("Agregando producto " + idProducto);
+            actualizarDebug("Agregando producto premium " + idProducto);
             
             const producto = productos[idProducto];
             if (!producto) return;
@@ -380,31 +1020,32 @@
                     id: producto.id,
                     nombre: producto.nombre,
                     precio: producto.precio,
+                    imagen: producto.imagen,
                     cantidad: 1
                 });
             }
             
             actualizarContador();
-            actualizarDebug(producto.nombre + " agregado (Total: " + obtenerTotalItems() + ")");
+            actualizarDebug(producto.nombre + " agregado exitosamente");
             
-            // Feedback visual
+            // Feedback visual mejorado
             const boton = event.target;
-            const textoOriginal = boton.textContent;
-            boton.textContent = "✅ ¡Agregado!";
-            boton.style.background = "#28a745";
+            const textoOriginal = boton.innerHTML;
+            boton.innerHTML = "✅ ¡Agregado!";
+            boton.style.background = "linear-gradient(135deg, #27ae60, #2ecc71)";
             
             setTimeout(function() {
-                boton.textContent = textoOriginal;
+                boton.innerHTML = textoOriginal;
                 boton.style.background = "";
-            }, 1500);
+            }, 2000);
             
             console.log("🛒 Carrito:", carrito);
         }
         
         // Abrir carrito
         function abrirCarrito() {
-            console.log("📂 ABRIENDO CARRITO");
-            actualizarDebug("Abriendo carrito");
+            console.log("📂 ABRIENDO CARRITO PREMIUM");
+            actualizarDebug("Abriendo experiencia de compra premium");
             
             const modal = document.getElementById('cartModal');
             if (modal) {
@@ -438,13 +1079,19 @@
         
         // Mostrar productos en carrito
         function mostrarProductosCarrito() {
-            console.log("🎨 MOSTRANDO CARRITO");
+            console.log("🎨 MOSTRANDO CARRITO PREMIUM");
             
             const contenedor = document.getElementById('cartItems');
             const precioTotal = document.getElementById('totalPrice');
             
             if (carrito.length === 0) {
-                contenedor.innerHTML = '<p style="text-align: center; color: #666;">🛒 Carrito vacío</p>';
+                contenedor.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 80px; margin-bottom: 20px; opacity: 0.3;">🛒</div>
+                        <p style="font-size: 18px; color: #666; margin-bottom: 10px;">Tu carrito está vacío</p>
+                        <p style="color: #999;">¡Agrega algunos productos increíbles!</p>
+                    </div>
+                `;
                 precioTotal.textContent = '0';
                 return;
             }
@@ -457,21 +1104,24 @@
                 const subtotal = item.precio * item.cantidad;
                 total += subtotal;
                 
-                html += '<div class="cart-item">';
-                html += '  <div class="item-info">';
-                html += '    <div class="item-name">' + item.nombre + '</div>';
-                html += '    <div class="item-price">$' + item.precio.toLocaleString() + '</div>';
-                html += '    <div class="quantity-controls">';
-                html += '      <button class="qty-btn" onclick="cambiarCantidad(' + item.id + ', -1)">-</button>';
-                html += '      <span class="quantity">' + item.cantidad + '</span>';
-                html += '      <button class="qty-btn" onclick="cambiarCantidad(' + item.id + ', 1)">+</button>';
-                html += '    </div>';
-                html += '  </div>';
-                html += '  <div>';
-                html += '    <div style="font-weight: bold; margin-bottom: 10px; font-size: 18px;">$' + subtotal.toLocaleString() + '</div>';
-                html += '    <button class="remove-btn" onclick="eliminarItem(' + item.id + ')">Eliminar</button>';
-                html += '  </div>';
-                html += '</div>';
+                html += `
+                    <div class="cart-item">
+                        <img src="${item.imagen}" alt="${item.nombre}" class="cart-item-image">
+                        <div class="item-info">
+                            <div class="item-name">${item.nombre}</div>
+                            <div class="item-price">$${item.precio.toLocaleString()}</div>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                                <span class="quantity">${item.cantidad}</span>
+                                <button class="qty-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="item-total">
+                            <div class="item-total-price">$${subtotal.toLocaleString()}</div>
+                            <button class="remove-btn" onclick="eliminarItem(${item.id})">Eliminar</button>
+                        </div>
+                    </div>
+                `;
             }
             
             contenedor.innerHTML = html;
@@ -508,36 +1158,36 @@
             
             actualizarContador();
             mostrarProductosCarrito();
-            actualizarDebug("Producto eliminado");
+            actualizarDebug("Producto eliminado del carrito");
         }
         
         // Vaciar carrito
         function vaciarCarrito() {
-            if (confirm('¿Vaciar carrito?')) {
+            if (confirm('¿Estás seguro de que quieres vaciar tu carrito premium?')) {
                 carrito = [];
                 actualizarContador();
                 mostrarProductosCarrito();
-                actualizarDebug("Carrito vaciado");
+                actualizarDebug("Carrito vaciado completamente");
             }
         }
         
         // Comprar
         function comprar() {
             if (carrito.length === 0) {
-                alert('El carrito está vacío');
+                alert('Tu carrito está vacío. ¡Agrega algunos productos increíbles!');
                 return;
             }
             
             const total = obtenerPrecioTotal();
             const items = obtenerTotalItems();
             
-            alert('¡Compra realizada! 🎉\n\nTotal: $' + total.toLocaleString() + '\nProductos: ' + items);
+            alert(`🎉 ¡Compra realizada con éxito!\n\n💰 Total: $${total.toLocaleString()}\n📦 Productos: ${items}\n\n¡Gracias por elegir MiTienda Pro!`);
             
             carrito = [];
             actualizarContador();
             mostrarProductosCarrito();
             cerrarCarrito();
-            actualizarDebug("Compra completada");
+            actualizarDebug("Compra premium completada exitosamente");
         }
         
         // Funciones auxiliares
@@ -557,7 +1207,7 @@
             return total;
         }
         
-        console.log("🎯 SCRIPT CARGADO");
+        console.log("🎯 CARRITO PREMIUM CON 12 PRODUCTOS CARGADO");
     </script>
 </body>
 </html>
